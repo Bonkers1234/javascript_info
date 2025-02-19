@@ -82,4 +82,53 @@ Used when we need to explicitly convert a value to the expected type. We can dis
   - Values that are intuitively “empty”, like `0`, an empty string, `null`, `undefined`, and `NaN`, become `false`
   - Other values become `true`
 
+
 ## 2.8 Basic operators, maths [link](https://javascript.info/operators)
+`Operand`: is what operators are applied to, like number or string
+
+`Operator`: is either applied to one operand(`unary`) or evaluates an expression between 2 operands(`binary`):
+- `-x` is a unary operand that reverses the sign of a number
+- `y - x` is a binary operand that evaluates the expression
+
+Math operators:
+- `+, -, *, /`
+- `%`: Reminder of the integer division (8 % 3) // 2, the remainder of 8 divided by 3
+- `**`: Exponentiation (a ** b raises a to the power of b)
+
+String concatenation with binary `+`:
+- `let s = "my" + "string";` concatenates strings into one
+- `'1' + 2` converts number to a string and concatenates
+- in more complex examples with more than 1 operator expression is evalueated one after another:
+  - `2 + 2 + '1'` // "41" and not "221"
+  - `'1' + 2 + 2` // "122" and not "14"
+- The binary `+` is the only operator that supports strings in such a way
+- Other arithmetic operators work **only** with numbers and always convert their operands to numbers
+  - `6 - '2'` // 4, converts '2' to a number
+  - `'6' / '2'` // 3, converts both operands to numbers
+
+Numeric conversion, unary `+`:
+- does nothing to numbers 
+- converts other data types into numbers like `Number()`:
+
+  `let apples = "2"`
+
+  `let oranges = "3"`
+
+  `+apples + +oranges` // 5 instead of '23'
+
+Operator precedence:
+- If an expression has more than one operator, the execution order is defined by their *precedence*, or, in other words, the default priority order of operators
+- Parentheses override any precedence `(1 + 2) * 2`
+
+Modify-in-place:
+- `+=, -=, *=, /=` shorthand for `n = n + 5`
+- `n *= 3 + 5;` // right part evaluated first, same as n *= 8
+
+Increment/decrement:
+- either prefix(`++counter`, returns incremented valuer) or postfix(`counter++`, returns preincrement value)
+- can be usend inside expression like `2 * ++counter(1) // 4` but is harder to understand
+
+Bitwise operators and Comma are rarely used in everyday programming, more info [link](https://javascript.info/operators#bitwise-operators)
+
+### Exercises:
+- 8_operators.js

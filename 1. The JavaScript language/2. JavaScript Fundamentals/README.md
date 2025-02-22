@@ -52,6 +52,7 @@ There are 8 basic data types:
 - `undefined`
 - `symbol` type is used to create unique identifiers for objects
 - `object` for more complex data structures (is not a **primitive** value like the rest)
+
 The `typeof/typeof()` operator allows us to see which type is stored in a variable.
 
 ### Exercises:
@@ -132,3 +133,10 @@ Bitwise operators and Comma are rarely used in everyday programming, more info [
 
 ### Exercises:
 - 8_operators.js
+
+
+## 2.9 Comparisons [link](https://javascript.info/comparison#boolean-is-the-result)
+- note to be added...
+
+### Exercises:
+- 9_comparisons.js

@@ -140,3 +140,17 @@ Bitwise operators and Comma are rarely used in everyday programming, more info [
 
 ### Exercises:
 - 9_comparisons.js
+
+
+## 2.10 Conditional branching: if, '?' [link](https://javascript.info/ifelse)
+...
+
+### Exercises:
+- 10_conditionals.js
+
+
+## 2.11 Logical operators [link](https://javascript.info/logical-operators)
+...
+
+### Exercises:
+- 11_logical operators.js

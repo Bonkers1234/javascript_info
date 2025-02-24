@@ -154,3 +154,16 @@ Bitwise operators and Comma are rarely used in everyday programming, more info [
 
 ### Exercises:
 - 11_logical operators.js
+
+
+## 2.12 Nullish coalescing operator '??' [link](https://javascript.info/nullish-coalescing-operator)
+- written as `??`
+- `??` returns the first argument if it's not `null/undefined`. Otherwise, the second one.
+- The common use case for `??` is to provide a default value
+- due to low precendece it should always be used with parentheses
+
+
+## 2.13 Loops: while and for [link](https://javascript.info/while-for)
+
+### Exercises:
+- 13_loops.js

@@ -167,3 +167,15 @@ Bitwise operators and Comma are rarely used in everyday programming, more info [
 
 ### Exercises:
 - 13_loops.js
+
+
+## 2.14 The "switch" statement [link](https://javascript.info/switch)
+- A `switch` statement can replace multiple `if` checks.
+- It gives a more *descriptive* way to compare a value with multiple variants.
+- uses `strict` equality operator so **type** matters for each case
+- each case needs a `break` statement or the code will execute until the end of `switch` 
+- as a result of the above we can *group* `case`'s together with last one having a `break` statement
+- at the end of `switch` we can put optional `default` case that is executed if no `case` is matched
+
+### Exercises:
+- 14_switch.js

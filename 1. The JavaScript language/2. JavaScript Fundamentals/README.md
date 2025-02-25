@@ -184,5 +184,31 @@ Bitwise operators and Comma are rarely used in everyday programming, more info [
 ## 2.15 Functions [link](https://javascript.info/function-basics)
 ...
 
-## Exercises:
+### Exercises:
 - 15_functions.js
+
+
+## 2.16 Function expressions [link](https://javascript.info/function-expressions)
+- **function expression** allows us to create a function in the middle of an expression
+- `callback function` is a function passed into another function to be *called back* later if necessary
+- we can write *shorter* `anonymous` functions as `callbacks` inside the function *call* arguments, which are inaccessible outside of the function
+- differences between function `declaration` and `expression`:
+  - synthax (`function nameOfFunction() {}` and `let nameOfFunction = function() {}`)
+  - **expression** is *creaetd* when interpreter/compiler reaches the code line it is created on
+  - **declaration** is *hoisted* to the top before code execution so it can be called even before original declaration (due to internal algorithm)
+  - **declaration** is visible (with `use strict`) inside its code block and not outside (example with conditional declaration)
+  - **expression** can be assigned conditionally to the variable outside the block scope (in the example above), or even with `anonymous` functions passed inside a ternary operaton as `function expression` 
+
+
+## 2.17 Arrow functions, the basics [link](https://javascript.info/arrow-functions-basics)
+- **arrow function**`() => {}` can be written instead of **function expression** `function() {}`
+- if we have `{}` for code block, a `return` is needed
+- a **single** argument passed into `arrow function` does not need *parentheses* but if there are no arguments at all they are necessary
+
+### Exercises:
+- 17_arrow_functions.js
+
+
+
+
+

@@ -179,3 +179,10 @@ Bitwise operators and Comma are rarely used in everyday programming, more info [
 
 ### Exercises:
 - 14_switch.js
+
+
+## 2.15 Functions [link](https://javascript.info/function-basics)
+...
+
+## Exercises:
+- 15_functions.js

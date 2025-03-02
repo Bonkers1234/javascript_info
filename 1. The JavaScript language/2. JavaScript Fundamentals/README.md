@@ -209,6 +209,5 @@ Bitwise operators and Comma are rarely used in everyday programming, more info [
 - 17_arrow_functions.js
 
 
-
-
-
+## 2.18 JavaScript specials [link](https://javascript.info/javascript-specials)
+Brief recap of JavaScript features up till now.

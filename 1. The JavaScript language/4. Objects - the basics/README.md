@@ -110,4 +110,109 @@ Nested Cloning:
   user.sayHi(); // Ilya
   ```
 
+### Exercises:
+- 4_object_methods_this.js
+
+
+## 4.5 Constructor, operator "new" [link](https://javascript.info/constructor-new)
+- Constructor functions:
+  - allow us to create and initialize new, reusable objects from predefined blueprint
+  - starts with **Capital** letter
+  - prefixed with `new` operator, that does the following:
+    - A new empty object is created and assigned to `this`
+    - The function body executes. Usually it modifies `this`, adds new properties to it
+    - value of `this` is returned
+    ```javascript
+    function User(name) {
+      // this = {};  (implicitly)
+
+      // add properties to this
+      this.name = name;
+      this.isAdmin = false;
+
+      // return this;  (implicitly)
+    }
+    ```
+
+-  Constructor mode test: new.target:
+    - *Advanced stuff*, we can use `new.target` inside a function to check if it was called with or without `new`
+    - can be used in libraries to check if function was called with `new` or not, and if so call itself with `new`, this adds flexibility so we dont have to use `new`
+
+- Return from constructors:
+  - Usually, constructors do not have a `return` statement. Their task is to write all necessary stuff into `this`, and it automatically becomes the result
+  - if there is a `return`:
+    - If `return` is called with an object, then the object is returned instead of `this`
+    - If `return` is called with a primitive/empty, it’s ignored and `this` is returned
+
+- Methods in constructor:
+  - we can also add functions/methods to `this` inside a Constructor function just as any other properties (like 'sayHi')
+
+### Exercises:
+- 5_constructor_operator_new.js
+
+
+## 4.6 Optional chaining '?.' [link](https://javascript.info/optional-chaining)
+- The “non-existing property” problem:
+  - when traversing down the `.` object property notation we might sometimes encounter (in complex objects) a problem of a property not existing,   either because it was not created or can be optional
+    ```javascript
+    // document.querySelector('.elem') is null if there's no element
+    let html = document.querySelector('.elem').innerHTML; // error if it's null
+    ```
+  - Trying to access it will result in an error and because of this a `?.` operator was created (previously we used **ternary** or `&&` operators)
+
+- Optional chaining:
+  - `?.` stops the evaluation if the value before `?.` is `undefined` or `null` and returns `undefined`
+    ```javascript
+    let html = document.querySelector('.elem')?.innerHTML; // will be undefined, if there's no element
+    let user = null;
+    alert( user?.address ); // undefined
+    alert( user?.address.street ); // undefined
+    ```
+  - `?.` applies **ONLY** to the value **BEFORE IT**, not any further
+  - **DO NOT OVERUSE IT**, apply only to optional values that are **OK** not to exist
+
+- Short-circuiting:
+  - As it was said before, the `?.` immediately stops (“short-circuits”) the evaluation if the left part doesn’t exist
+    ```javascript
+    let user = null;
+    let x = 0;
+
+    user?.sayHi(x++); // no "user", so the execution doesn't reach sayHi call and x++
+
+    alert(x); // 0, value not incremented
+    ```
+
+- Other variants: `?.()`, `?.[]`:
+  - `?.()` can be used to check if a function/method exists and **ONLY THEN** execute it:
+    ```javascript
+    let userAdmin = {
+      admin() {
+        alert("I am admin");
+      }
+    };
+
+    let userGuest = {};
+    userAdmin.admin?.(); // I am admin
+    userGuest.admin?.(); // nothing happens (no such method)
+    ```
+  - `?.[]` works if we want to access property with `[]` notation instead of `.`:
+    ```javascript
+    let key = "firstName";
+
+    let user1 = {
+      firstName: "John"
+    };
+
+    let user2 = null;
+    alert( user1?.[key] ); // John
+    alert( user2?.[key] ); // undefined
+    ```
+  - `?.` works also with `delete`:
+    ```javascript
+    delete user?.name; // delete user.name if user exists
+    ```
+
+
+
+
 

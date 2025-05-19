@@ -213,6 +213,51 @@ Nested Cloning:
     ```
 
 
+## 4.7 Symbol type [link](https://javascript.info/symbol)
+- only 2 primitive types can serve as an **object property keys**:
+  - `string` and `symbol`
+  - anything else is **CONVERTED** to `string`
+
+Symbol:
+- represents primitive unique identifier with optional `description/symbol name` and is created with `Symbol('id')`
+- 2 symbols with same description are **NOT** the same, each is unique
+- they **DO NOT** auto convert to `strings` with functions like `alert()` and throw error as safeguard, use either `.toString()` or `symbol.description`
+
+“Hidden” properties: 
+- `symbol` is a *hidden* property of an Object that:
+  - no other part of the code can **accidentally** access or overwrite
+  - by adding it we wont mess up third-party code predefined behaviour in regards to the Object
+  - both parties can have their own symbols with same `description` for specific purposes without `id` collisions
+- for `{...}` we need to place `symbol` variable inside square brackets `[id]: 123` as we need **value** from the variable and not string
+- `for...in` loop **skips** `symbols`, just like `Object.keys(user)` ignores them to prevent **unexpected** access
+- `Object.assign()` copies both `string` and `symbol` properties by design, since we want **ALL** properties
+- also `Object.getOwnPropertySymbols(obj)` will get us **ALL** object symbols, while `Reflect.ownKeys(obj)` returns **ALL** properties
+
+Global symbols:
+- there exists `global symbol registry` where we can create and read **globally** accessible symbols from different parts of our application
+  - to **READ** or **CREATE** a symbol, if absent use `Symbol.for(key)`:
+    ```javascript
+    // read from the global registry
+    let id = Symbol.for("id"); // if the symbol did not exist, it is created
+
+    // read it again (maybe from another part of the code)
+    let idAgain = Symbol.for("id");
+
+    // the same symbol
+    alert( id === idAgain ); // true
+    ```
+  - for looking up `symbol` 'description' using `symbol` variable (only works for global symbols) use `Symbol.keyFor(symbVar)` // returns 'name'
+    - returns `undefined` for non-global symbols
+  - remember **ALL** symbols have `.description` property
+
+System symbols:
+- there are many system symbols that javascript uses internally to fine-tune various aspects of Objects, some of which are:
+  - Symbol.toPrimitive
+  - Symbol.iterator
+  - Symbol.hasInstance
+  - and more...
+
+
 
 
 

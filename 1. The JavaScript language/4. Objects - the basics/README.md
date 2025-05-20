@@ -258,6 +258,89 @@ System symbols:
   - and more...
 
 
+## 4.8 Object to primitive conversion [link](https://javascript.info/object-toprimitive)
+- when we use Object with math operators or in functions like `alert()` they are **AUTO-CONVERTED** to primitives and only then the operation is carried out, which result **CANT** be an Object
+
+Conversion rules:
+- no conversion to `boolean`, Objects exist by default
+- there exists **ONLY** `numeric` and `string` conversion:
+  - numeric happens when we `subtract` or apply mathematical functions to Objects (`Date` Objects can be subtracted)
+  - string usually happens when we output an Object with `alert(obj)` and in similar context
+- we **CAN** implement conversions by ourselves
+
+Hints:
+- javascript decides which conversion to run based on 3 types of `hints`:
+  - `string`, for an object-to-string conversion when we expect a string (`alert(obj)`, or object as another object key `anotherObj[obj] = 123`)
+  - `number`, for an object-to-number conversion, like when we’re doing maths (`number(obj)`/`+obj`, maths except binary`+` and comparisons `>`)
+    - most math functions also include this conversion
+  - `default`, occurs in rare cases when operator is *not sure* what type to expect
+    - binary `+` can work for string concatenation and number addition, so it will use `default` hint to convert it
+    - also with `==` Object can be compared to string/number/symbol and conversion is unclear so `default` is used
+- **REMEMBER** all built-in objects except for one case (`Date`) implement `default` conversion same as `number`
+
+Object methods javascript tries to find and call for conversion:
+- `Symbol.toPrimitive`, built-in symbol, created like this:
+  ```javascript
+  obj[Symbol.toPrimitive] = function(hint) {
+    // here goes the code to convert this object to a primitive
+    // it must return a primitive value
+    // hint = one of "string", "number", "default"
+  };
+  let user = {
+    name: "John",
+    money: 1000,
+
+    [Symbol.toPrimitive](hint) {
+      alert(`hint: ${hint}`);
+      return hint == "string" ? `{name: "${this.name}"}` : this.money;
+    }
+  };
+  ```
+  - If the method `Symbol.toPrimitive` exists, it’s used for all hints, and no more methods are needed.
+- `toString/valueOf`, If there’s no `Symbol.toPrimitive` then JavaScript tries to find methods `toString` and `valueOf`:
+  - for `string` hint, call `toString`, if it doesnt exist or returns Object instead of primitive call `valueOf`
+  - for other hints(`number/default`), call `valueOf` and if it doesnt exist or returns an Object call `toString`
+- this methods **MUST** return primitive value, if Object is returned it is **IGNORED**
+- By default, a plain object has following `toString` and `valueOf` methods that return the following:
+  ```javascript
+  let user = {name: "John"};
+  alert(user); // `toString` is called: [object Object]
+  alert(user.valueOf() === user); // returns the object ITSELF so its true
+  ```
+
+Implementation of `toString` and `valueOf` insted of `Symbol.toPrimitive`:
+  ```javascript
+  let user = {
+    name: "John",
+    money: 1000,
+    // for hint="string"
+    toString() {
+      return `{name: "${this.name}"}`;
+    },
+    // for hint="number" or "default"
+    valueOf() {
+      return this.money;
+    }
+  };
+
+  alert(user); // toString -> {name: "John"}
+  alert(+user); // valueOf -> 1000
+  alert(user + 500); // valueOf -> 1500
+  ```
+  - for single 'catch-all' place to handle conversion we can implememnt only `toString`:
+  ```javascript
+    let user = {
+      name: "John",
+      toString() {
+        return this.name;
+      }
+    };
+
+    alert(user); // toString -> John
+    alert(user + 500); // toString -> John500
+  ```
+
+Further conversions may apply if `toString` by default returns `"2"` from an Object when called with `Obj` * 2, for example
 
 
 

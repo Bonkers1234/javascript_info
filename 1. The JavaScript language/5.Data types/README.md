@@ -106,6 +106,96 @@
   - 2_numbers.js
 
 
+## 5.3 Strings [link](https://javascript.info/string)
+- Quotes:
+  - single/double quotes `' and "`, and backticks that allow us to use `template strings` with `${}` and `multiline` strings
+
+- Special characters:
+  - start with `escape character` `\`
+  - most common ones are `\n`, quotes `\', \"` and backtick, backslash `\\` and `\t`
+
+- String length:
+  - we can get length of the string with `str.length` property
+
+- Accessing characters:
+  - to get characters at `pos` we can either use `[]` or `str.at(pos)`:
+      ```javascript
+      let str = `Hello`;
+      // the first character
+      alert( str[0] ); // H
+      alert( str.at(0) ); // H
+      // the last character
+      alert( str[str.length - 1] ); // o
+      alert( str.at(-1) ); // allows negative position counted from the end of the string
+      alert( str[-2] ); // undefined, is returned for negatives with square brackets
+      ```
+  - `for...of`, allows us to iterate over the string characters:
+      ```javascript
+      for(let char of "Hello") {
+        alert(char) // H,e,l,l,o (char becomes "H", then "e", then "l" etc)
+      }
+      ```
+
+- Strings are **immutable** and can’t be changed in JavaScript, It is impossible to change a character `str[0] = 'h'; // error`
+
+- Changing the case:
+  - `'Interface'.toUpperCase() // INTERFACE`, will turn all letters to UPPER case **BUT** can be applied to single character:
+    - `'interface'[0].toUpperCase() // 'I'`, probably even to slices etc.
+  - `'Interface'.toLowerCase() // interface`, will turn letters to LOWER case, also can be applied to single character like above
+
+- Searching for a substring:
+  - `str.indexOf(substr, [pos])`, looks for the case SENSITIVE `substr` in `str`, starting from 0 index or optionally provided `pos`
+    - returns the position `str` was found or `-1` if there was nothing returned/found
+      ```javascript
+      let str = 'Widget with id';
+      alert( str.indexOf("id") ); // 1, "id" is found at the position 1 (..idget with id)
+      ```
+    - `str.lastIndexOf()`, does the same but from the end
+    - with `if` we have to look out for match at `0` index that will covnert to false so better to comapre against `-1`:
+      - `if (str.indexOf("Widget") != -1)`
+  - `str.inculdes(substr, pos)`, modern method that returns true/false depending if `str` contains `substr`, good for finding match not position
+  - `str.startsWith(substr)/str.endsWith(substr)`, do exactly what they are called, **CASE SENSITIVE**
+
+- Getting a substring:
+  - `str.slice(start [, end])`, Returns the part of the string from `start` to (but not including) `end`
+    - if there is no second argument `slice` goes till the end of the string
+    - negative values are possible and are counted from the end `alert( str.slice(-4, -1) )`
+  - `str.substring(start [, end])`, Returns the part of the string *between* `start` and `end` (not including `end`)
+    - This is almost the same as `slice`, but it allows `start` to be greater than `end` (in this case it simply swaps `start` and `end` values)
+    - negative values **DONT WORK** and are treated as `0`
+  - `str.substr(start [, length])`, Returns the part of the string from `start`, with the given `length`
+    - The first argument may be negative, to count from the end
+
+- Comparing strings:
+  - comparing string is not always as easy as it seems like with `'Österreich' > 'Zealand'` since diacritical marks are 'out of order'
+  - There are special methods that allow to get the character for the code and back:
+    - `str.codePointAt(pos)` Returns a decimal number representing the code for the character at position `pos`:
+      - `alert( "z".codePointAt(0) ); // 122`
+      - `alert( "z".codePointAt(0).toString(16) ); // 7a (if we need a hexadecimal value)`
+    - `String.fromCodePoint(code)` Creates a character by its numeric `code`:
+      - `alert( String.fromCodePoint(90) ); // Z`
+      - `alert( String.fromCodePoint(0x5a) ); // Z (we can also use a hex value as an argument)`
+  - Correct comparisons:
+    - when we need to compare strings in different language with their order/rules/algorithms we use `str.localeCompare(str2)`:
+      - returns `negative/-1` number if `str` is LESS than `str2`
+      - `positive/1` number if `str` is GREATER than `str2`
+      - `0` if they are equal
+
+- Extra:
+  - `str.trim()` trims spaces from beginning and end of string
+  - `str.repeat(n)` repeats string `n` times
+
+### Exercises:
+  - 3_strings.js
+
+
+
+
+
+
+
+
+
 
 
 
